@@ -36,7 +36,7 @@ Payment object ออกจาก business logic ของ `OrderService`
 
 ## Structure (Diagram)
 
-<img src="factorymethod/diagram/factory-method-diagram.png" style="width:100%;" />
+<img src="diagram/factory-method-diagram.png" style="width:100%;" />
 
 ---
 

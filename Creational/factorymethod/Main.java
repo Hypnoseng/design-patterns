@@ -7,6 +7,7 @@ public class Main {
     public static void client(OrderService orderService){//
         System.out.println(orderService.processOrder());
     }
+
     public static void main(String[] args){
         OrderService order = new CeditCardPaymentService();
         client(order);

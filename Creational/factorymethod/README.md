@@ -90,14 +90,21 @@ implementation ของ `OrderService` ได้ใน runtime
 โดยไม่ต้องแก้ไข logic การประมวลผลคำสั่งซื้อ
 
 ```java
-OrderService order = new CeditCardPaymentService();
-client(order);
+public static void client(OrderService orderService){
+        System.out.println(orderService.processOrder());
+}
 
-order = new PromptPaymentService();
-client(order);
+public static void main(String[] args){
+    OrderService order = new CeditCardPaymentService();
+    client(order);
 
-order = new PayPalPaymentService();
-client(order);
+    order = new PromptPaymentService();
+    client(order);
+
+    order = new PayPalPaymentService();
+    client(order);
+}
+
 ```
 ```java
 ---------Processing---------

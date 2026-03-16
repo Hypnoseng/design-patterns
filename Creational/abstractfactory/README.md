@@ -7,45 +7,46 @@
 ## ตัวอย่าง
 
 ในระบบการจำลองภารกิจอวกาศ (Space Mission Simulation)  มีหลายหน่วยงานที่ทำภารกิจ เช่น **NASA, SpaceX และ ISRO** 
+
 แต่ละหน่วยงานมีองค์ประกอบของระบบที่แตกต่างกัน เช่น
 
 -   Rocket
 -   Astronaut
 -   Control System
     
-
-แต่ทุกหน่วยงานยังคงมีโครงสร้างพื้นฐานของระบบเหมือนกัน  ดังนั้นระบบควรสามารถสร้าง object ของแต่ละหน่วยงานได้ โดยไม่ต้องแก้โค้ดในส่วนของ client
+ระบบจึงใช้ **Abstract Factory Pattern** เพื่อสร้าง object เหล่านี้โดยไม่ต้องระบุ class ที่สร้างจริง
 
 ---
 
 ## Problem
 
-ในระบบการจำลองภารกิจอวกาศ (Space Mission Simulation)  มีหลายหน่วยงานที่ทำภารกิจ เช่น **NASA, SpaceX และ ISRO**
-แต่ละหน่วยงานมีองค์ประกอบของระบบที่แตกต่างกัน เช่น
+หาก Client สร้าง object โดยตรง เช่น
 
--   Rocket
--   Astronaut
--   Control System
-    
-แต่ทุกหน่วยงานยังคงมีโครงสร้างพื้นฐานของระบบเหมือนกัน  ดังนั้นระบบควรสามารถสร้าง object ของแต่ละหน่วยงานได้ โดยไม่ต้องแก้โค้ดในส่วนของ client
+- NasaRocket
+- SpaceXRocket
+- IsroRocket
+
+Client จะต้องรู้ class ทุกตัว ทำให้เกิด **tight coupling** และเมื่อเพิ่ม Space Agency ใหม่ จะต้องแก้โค้ดหลายส่วนของระบบ
 
 ---
 
 ## Solution
 
-ใช้ **Abstract Factory Pattern** เพื่อสร้าง interface สำหรับการสร้าง object โดยกำหนด factory กลางที่สามารถสร้าง object หลายชนิด เช่น
+ใช้ **Abstract Factory Pattern** เพื่อสร้าง interface สำหรับการสร้าง object
 
--   Rocket  
--   Astronaut
--   Control System
-    
-จากนั้นสร้าง **Concrete Factory** สำหรับแต่ละหน่วยงาน เช่น
+Factory จะกำหนด method เช่น
 
--   NasaFactory
--   SpaceXFactory
--   IsroFactory
-  
-แต่ละ factory จะสร้าง product family ของตัวเอง  ทำให้ client สามารถใช้งาน object ผ่าน interface โดยไม่ต้องรู้ class ที่ถูกสร้างจริง
+- createRocket()
+- createAstronaut()
+- createControlSystem()
+
+Concrete Factory เช่น
+
+- NasaFactory
+- SpaceXFactory
+- IsroFactory
+
+จะเป็นผู้กำหนดว่าควรสร้าง object แบบใด
 
 <img src="diagram/Solution_example.jpg" style="width:100%;" />
 
